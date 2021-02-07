@@ -21,9 +21,9 @@ export default class UserModel {
     };
 
     public static resetPassword: IModel = {
-        username: { required: true },
         password: { required: true },
-        requestId: { required: true }
+        requestId: { required: true },
+        username: { required: true },
     };
 
 }

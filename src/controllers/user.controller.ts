@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { ObjectId } from "mongodb";
-import User from "../dao/user.dao";
 import ResetRequest from "../dao/reset-request.dao";
+import User from "../dao/user.dao";
 import ResponseHandler from "../etc/response";
 import { md5, randomBytes } from "../lib/crypto";
 import NodeMailer from "../lib/mailer";
@@ -58,11 +58,11 @@ export default class UserController {
             }
             const resetRequestId = await ResetRequest.create({ username: user.username, timestamp });
             const link = `${process.env.PASSWORD_RESET_BASE_URL}?requestId=${resetRequestId}`;
-            await NodeMailer.sendEmail({ 
+            await NodeMailer.sendEmail({
                 from: "info@daakiya.email",
-                to: email, 
                 subject: "Password Reset Request | LogMeIn",
-                text: `Hello ${user.firstName}, to reset your password click on this link ${link}` 
+                text: `Hello ${user.firstName}, to reset your password click on this link ${link}`,
+                to: email,
             });
             ResponseHandler.success(res, { msg: `reset password link has been emailed` });
         } catch (e) {
@@ -73,7 +73,7 @@ export default class UserController {
     /**
      * @param req
      * @param res
-     * @param next 
+     * @param next
      */
     public static async resetPassword(req: Request, res: Response, next: NextFunction) {
         try {

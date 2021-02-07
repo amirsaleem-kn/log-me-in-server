@@ -3,9 +3,9 @@
  */
 
 import mongodb from "mongodb";
+import ResetRequest from "../../dao/reset-request.dao";
 /** DAO  */
 import User from "../../dao/user.dao";
-import ResetRequest from "../../dao/reset-request.dao";
 /** Logger */
 import Logger from "../logger";
 
